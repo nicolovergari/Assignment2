@@ -29,4 +29,28 @@ public class BillCalculatorTest {
         }
     }
 
+    @org.junit.Test
+    public void testMoreThan10Pizza1IsFree() {
+        List<MenuItem> itemsOrdered = new ArrayList<>();
+        itemsOrdered.add(new MenuItem(MenuItem.itemType.PIZZE, "Margherita", 4.0));
+        itemsOrdered.add(new MenuItem(MenuItem.itemType.PIZZE, "Capricciosa", 5.50));
+        itemsOrdered.add(new MenuItem(MenuItem.itemType.PIZZE, "Diavola", 5.0));
+        itemsOrdered.add(new MenuItem(MenuItem.itemType.PIZZE, "Margherita", 4.0));
+        itemsOrdered.add(new MenuItem(MenuItem.itemType.PIZZE, "Margherita", 4.0));
+        itemsOrdered.add(new MenuItem(MenuItem.itemType.PIZZE, "Diavola", 5.0));
+        itemsOrdered.add(new MenuItem(MenuItem.itemType.PIZZE, "Viennese", 5.50));
+        itemsOrdered.add(new MenuItem(MenuItem.itemType.PIZZE, "Margherita", 4.0));
+        itemsOrdered.add(new MenuItem(MenuItem.itemType.PIZZE, "Viennese", 5.50));
+        itemsOrdered.add(new MenuItem(MenuItem.itemType.PIZZE, "Bufala", 5.0));
+        itemsOrdered.add(new MenuItem(MenuItem.itemType.PIZZE, "Margherita", 4.0));
+        itemsOrdered.add(new MenuItem(MenuItem.itemType.PRIMI, "Carbonara", 6));
+        BillCalculator bill = new BillCalculator();
+        try {
+            double tot = bill.getOrderPrice(itemsOrdered);
+            assertEquals((53.50), tot, 0.0);
+        } catch (RestaurantBillException e) {
+            e.getMessage();
+        }
+    }
+
 }
