@@ -13,6 +13,11 @@ public class BillCalculator implements RestaurantBill {
 
     @Override
     public double getOrderPrice(List<MenuItem> itemsOrdered) throws RestaurantBillException {
-        return 0;
+        double billTot =0;
+
+        for (MenuItem m : itemsOrdered) {
+            billTot += m.getPrice();
+        }
+        return billTot;
     }
 }
