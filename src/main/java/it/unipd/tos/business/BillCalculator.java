@@ -30,6 +30,10 @@ public class BillCalculator implements RestaurantBill {
         if (count > 10) {
             billTot -= min;
         }
+
+        if (billTot > 100) {
+            billTot = billTot * 0.95;
+        }
         return billTot;
     }
 }
