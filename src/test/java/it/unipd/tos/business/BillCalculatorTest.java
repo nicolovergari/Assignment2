@@ -6,6 +6,8 @@ package it.unipd.tos.business;
 
 import it.unipd.tos.business.exception.RestaurantBillException;
 import it.unipd.tos.model.MenuItem;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +69,44 @@ public class BillCalculatorTest {
         } catch (RestaurantBillException e) {
             e.getMessage();
         }
+    }
+
+    @org.junit.Rule
+    public ExpectedException exception = ExpectedException.none();
+
+
+    @org.junit.Test
+    public void testMaxElementIs20() throws RestaurantBillException {
+        exception.expect(RestaurantBillException.class);
+        exception.expectMessage("Il massimo di elementi ordinabili è 20");
+
+        List<MenuItem> itemsOrdered = new ArrayList<>();
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+        itemsOrdered.add(new MenuItem(PRIMI, "Margherita", 6));
+
+        BillCalculator bill = new BillCalculator();
+        double tot = bill.getOrderPrice(itemsOrdered);
+
     }
 
 }
